@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Login_Suit_Dataprovider]">
+  <test name="login_TestCase_TC1.0">
+    <classes>
+      <class name="com.mln.login.Login_Validation"/>
+    </classes>
+  </test> <!-- login_TestCase_TC1.0 -->
+  <test name="login_TestCase_TC1.0(failed)">
+    <classes>
+      <class name="com.mln.login.Login_Validation">
+        <methods>
+          <include name="login_with_validation" invocation-numbers="3"/>
+          <include name="StartReporting"/>
+          <include name="CloseBrowser"/>
+          <include name="openBrowser"/>
+          <include name="EndReporting"/>
+        </methods>
+      </class> <!-- com.mln.login.Login_Validation -->
+    </classes>
+  </test> <!-- login_TestCase_TC1.0(failed) -->
+</suite> <!-- Failed suite [Login_Suit_Dataprovider] -->

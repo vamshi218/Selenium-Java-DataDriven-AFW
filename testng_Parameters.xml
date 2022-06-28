@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Login_Suit">
+	<test name="login_TestCase_InvalidCredentials_Password_TC1.0">
+	<parameter name ="username" value ="lakme88@gmail.com" ></parameter>
+	<parameter name ="password" value ="123" ></parameter>
+		<classes>
+			<class name="com.mln.login.InvalidCredentials_Password" />
+		</classes>
+	</test>
+	<test name="login_TestCase_InvalidCredentials_UserName_TC1.1">
+	<parameter name ="username" value ="lakme8@gmail.com" ></parameter>
+	<parameter name ="password" value ="Password@123" ></parameter>
+		<classes>
+			<class name="com.mln.login.InvalidCredentials_UserName" />
+		</classes>
+	</test>
+	<test name="login_TestCase_InvalidCredentials_TC1.2">
+	<parameter name ="username" value ="lakme8@gmail.com" ></parameter>
+	<parameter name ="password" value ="123" ></parameter>
+		<classes>
+			<class name="com.mln.login.InvalidCredentials" />
+		</classes>
+	</test>
+	<test name="login_TestCase_ValidCredentials_TC1.3">
+	<parameter name ="username" value ="lakme88@gmail.com" ></parameter>
+	<parameter name ="password" value ="Password@123" ></parameter>
+		<classes>
+			<class name="com.mln.login.ValidCredentials" />
+		</classes>
+	</test>
+</suite>

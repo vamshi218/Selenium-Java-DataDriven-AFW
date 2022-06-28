@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Login_Suit]">
+  <parameter name="password" value="Password@123"/>
+  <parameter name="username" value="lakme88@gmail.com"/>
+  <test name="login_TestCase_InvalidCredentials_Password_TC1.0">
+    <parameter name="password" value="123"/>
+    <parameter name="username" value="lakme88@gmail.com"/>
+    <classes>
+      <class name="com.mln.login.InvalidCredentials_Password"/>
+    </classes>
+  </test> <!-- login_TestCase_InvalidCredentials_Password_TC1.0 -->
+  <test name="login_TestCase_InvalidCredentials_UserName_TC1.1">
+    <parameter name="password" value="Password@123"/>
+    <parameter name="username" value="lakme8@gmail.com"/>
+    <classes>
+      <class name="com.mln.login.InvalidCredentials_UserName"/>
+    </classes>
+  </test> <!-- login_TestCase_InvalidCredentials_UserName_TC1.1 -->
+  <test name="login_TestCase_InvalidCredentials_TC1.2">
+    <parameter name="password" value="123"/>
+    <parameter name="username" value="lakme8@gmail.com"/>
+    <classes>
+      <class name="com.mln.login.InvalidCredentials"/>
+    </classes>
+  </test> <!-- login_TestCase_InvalidCredentials_TC1.2 -->
+  <test name="login_TestCase_ValidCredentials_TC1.3">
+    <parameter name="password" value="Password@123"/>
+    <parameter name="username" value="lakme88@gmail.com"/>
+    <classes>
+      <class name="com.mln.login.ValidCredentials"/>
+    </classes>
+  </test> <!-- login_TestCase_ValidCredentials_TC1.3 -->
+</suite> <!-- Failed suite [Login_Suit] -->
