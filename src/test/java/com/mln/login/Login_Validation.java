@@ -44,12 +44,7 @@ public class Login_Validation {
 	ExtentTest Testcase;
 	
 	//ReporterType reporterType;
-	String[][] strLoginCredentials = {
-			{"lakme88@gmail.com","123","invalid"},
-			{"lakme8@gmail.com","Password@123","invalid"},
-			{"lakme8@gmail.com","12443","invalid"},
-			{"lakme88@gmail.com","Password@123","valid"}
-	};
+
 	
 	@BeforeSuite
 	public void StartReporting(){
@@ -75,7 +70,7 @@ public class Login_Validation {
 		
 		//Opening the chrome browser
 		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 	}
@@ -89,8 +84,8 @@ public class Login_Validation {
 
 	}
 
-	@Test(dataProvider ="login data_exceldata")
-	public void login_with_validation1(String strUserName, String strPassword,String Validity) throws IOException{
+	@Test(dataProvider ="ExcelData" ,dataProviderClass = com.mln.dataproviders.DataProviders.class)
+	public void login_validation(String strUserName, String strPassword,String Validity) throws IOException{
 		Testcase = Reports.createTest("login_TestCase_TC1.0"+ "-" +TestNo);
 		TestNo =TestNo+1;
 
@@ -136,8 +131,8 @@ public class Login_Validation {
 
 
 	}
-	@Test(dataProvider ="login data_classdata")
-	public void login_with_validation2(String strUserName, String strPassword,String Validity) throws IOException {
+	@Test(dataProvider ="HardcodedData",dataProviderClass = com.mln.dataproviders.DataProviders.class)
+	public void login_validation_copy(String strUserName, String strPassword,String Validity) throws IOException {
 		Testcase = Reports.createTest("login_TestCase_TC1.0" + "-" + TestNo);
 		TestNo = TestNo + 1;
 
@@ -231,20 +226,6 @@ public class Login_Validation {
 
 	}
 
-	@DataProvider(name = "login data_classdata")
-	private Object[][] login_data_provider_classdata(){
-
-		return strLoginCredentials;
-
-	}
-
-	@DataProvider(name = "login data_exceldata")
-	private String[][] login_data_provider_exceldata() throws IOException{
-
-		//return getExcelData();
-		return ExcelReaders.getExcelDataMethod1("Login_Validation.xlsx","Data");
-
-	}
 
 
 
