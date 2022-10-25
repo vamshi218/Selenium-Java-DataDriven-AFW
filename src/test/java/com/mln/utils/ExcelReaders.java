@@ -1,42 +1,91 @@
 package com.mln.utils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.annotations.DataProvider;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class ExcelDataProvider {
+public class ExcelReaders {
 
-    private ExcelDataProvider(){}
-    @DataProvider(parallel = true)
-    public static Object[][] getExcelData(Method method) throws IOException {
+    private ExcelReaders(){}
 
-        FileInputStream fileInputStream = new FileInputStream(FrameworkConstants.getTestResourcePath()+"testdata/excel/TestData.xlsx");
+    public static List<Map<String,String>> getExcelDataAsMapList(String ExcelFileName, String SheetName) throws IOException {
+
+        FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") +"/src/test/resources/"+ExcelFileName);
         XSSFWorkbook wb = new XSSFWorkbook(fileInputStream);
-        XSSFSheet sheet = wb.getSheet(method.getName());
+        XSSFSheet sheet = wb.getSheet(SheetName);
 
         int iRowCount=	sheet.getLastRowNum();
         int iColCount = sheet.getRow(iRowCount).getLastCellNum();
-        Object[][]excelData = new Object[iRowCount][iRowCount];
+        List<Map<String,String>>excelData = new ArrayList<Map<String, String>>();
+
         Map<String,String> excelDataMap;
         for (int iRow =1 ; iRow <=iRowCount; iRow++){
-            excelDataMap = new HashMap<>();
+            excelDataMap = new HashMap<String,String>();
             for (int iCol =0 ; iCol <iColCount; iCol++){
                 String key = sheet.getRow(0).getCell(iCol).getStringCellValue();
                 String value= sheet.getRow(iRow).getCell(iCol).getStringCellValue();
                 excelDataMap.put(key,value);
-
-
             }
-            excelData[iRow-1][0]= iRow;
-            excelData[iRow-1][1] =excelDataMap;
+
+           excelData.add(excelDataMap);
+        }
+        wb.close();
+        return excelData;
+    }
+
+    public static String[][] getExcelDataMethod1(String ExcelFileName,String SheetName) throws IOException{
+
+        FileInputStream excelFile = new FileInputStream(System.getProperty("user.dir") +"/src/test/resources/"+ ExcelFileName);
+        XSSFWorkbook wb = new XSSFWorkbook(excelFile);
+        XSSFSheet sheet = wb.getSheet(SheetName);
+        int iRowCount=	sheet.getLastRowNum();
+        int iColCount = sheet.getRow(iRowCount).getLastCellNum();
+
+        Iterator<Row> rowIterator = sheet.rowIterator();
+        String[][] ExcelData = new String[iRowCount][iColCount];
+        int iRowNo =0;
+        while(rowIterator.hasNext()){
+            Row RowValue = rowIterator.next();
+            Iterator<Cell> cellIterator= RowValue.iterator();
+
+            int iColNo =0;
+            if (iRowNo >0){
+                while(cellIterator.hasNext()){
+                    ExcelData[iRowNo-1][iColNo] = cellIterator.next().toString();
+                    iColNo++;
+                }
+            }
+            iRowNo++;
         }
 
-        return excelData;
+        wb.close();
+        return ExcelData;
+
+    }
+    public static String[][] getExcelDataMethod2(String ExcelFileName,String SheetName) throws IOException{
+
+        FileInputStream excelFile = new FileInputStream(System.getProperty("user.dir") +"/src/test/resources/"+ExcelFileName);
+        XSSFWorkbook wb = new XSSFWorkbook(excelFile);
+        XSSFSheet sheet = wb.getSheet(SheetName);
+
+        int iRowCount=	sheet.getLastRowNum();
+        int iColCount = sheet.getRow(iRowCount).getLastCellNum();
+        //System.out.println(iRowCount);
+        //System.out.println(iColCount);
+
+        String[][] ExcelData = new String[iRowCount][iColCount];
+        for (int iRow =1 ; iRow <=iRowCount; iRow++){
+            for (int iCol =0 ; iCol < iColCount; iCol++){
+                ExcelData[iRow-1][iCol] = sheet.getRow(iRow).getCell(iCol).getStringCellValue();
+            }
+        }
+        wb.close();
+        return ExcelData;
+
     }
 }
 

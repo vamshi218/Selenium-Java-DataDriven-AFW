@@ -14,7 +14,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class InvalidCredentials_UserName {
 
-	@Test
+	@Test()
 	@Parameters({"username","password"})
 	public void login_with_invalid_username(String strUserName, String strPassword){
 		//Setting up the driver using WebDriverManager dependency
