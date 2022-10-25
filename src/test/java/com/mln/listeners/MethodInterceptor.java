@@ -22,6 +22,8 @@ public class MethodInterceptor implements IMethodInterceptor {
                 for (Map<String,String>bData: batchedata) {
                     if(bData.get("TestName").equalsIgnoreCase(methods.get(methodIndex).getMethod().getMethodName())){
                         if(bData.get("Execute").equalsIgnoreCase("YES")){
+                            methods.get(methodIndex).getMethod().setInvocationCount(Integer.parseInt(bData.get("InvocationCount")));
+                            methods.get(methodIndex).getMethod().setDescription("This is a sample description");
                             executionList.add(methods.get(methodIndex));
                         }
                     }
